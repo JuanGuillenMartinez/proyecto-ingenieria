@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    box-sizing: border-box;           
+}
+
+
+
+.carta-producto {
+    width: 350px;
+    background: white;
+    padding: 50px;
+    position:relative;
+    left:338px;
+    top: 200px;
+    transform:  translate(-58%, -58%);
+    text-transform: uppercase;
+    box-shadow:  1px 1px 19px 1px ;
+    margin-bottom: 20px;
+    
+}
+
+.carta-producto h1 {
+    font-size: 22px;
+    margin-bottom: 5px;
+    color: black;
+}
+
+.carta-producto p{
+    font-size: 12px;
+    color: #bbb;
+}
+
+.carta-producto img{
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background position: center;
+    transition: .6s linear;
+
+}
+
+.producto-info{
+    display: flex;
+    align-items:center;
+}
+
+.producto-precio{
+    color: black;
+    font-size: 26px;
+}
+
+.producto-button{
+
+    margin-left:auto;
+    color: #05B8EB;
+    text-decoration: none;
+    border: 2px solid;
+    padding: 8px 24px;
+    border-radius: 20px;
+    transition: 4s linear;
+}
+
+.producto-button:hover{
+    transition: scale(1.06);
+}
+
+

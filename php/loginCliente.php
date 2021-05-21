@@ -5,8 +5,8 @@ $correo = $datos['correo'];
 $contraseña = $datos['password'];
 
 $arreglo = array(
-	'correoElectronico' => $correo,
-	'contraseña' => $contraseña
+  'correoElectronico' => $correo,
+  'contraseña' => $contraseña
 );
 
 $curl = curl_init();
@@ -28,8 +28,9 @@ $response = curl_exec($curl);
 curl_close($curl);
 $obj = json_decode($response);
 $idDevuelto = $obj->data->idcliente;
-if($idDevuelto!=0) {
-    echo "Credenciales correctas";
+if ($idDevuelto != 0) {
+  header("Location: /index.html");
+  die();
 } else {
-    echo "Credenciales incorrectas";
+  echo "Credenciales incorrectas";
 }
