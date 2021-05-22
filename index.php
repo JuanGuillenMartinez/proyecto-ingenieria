@@ -1,3 +1,3 @@
 <?php
-header("Location: /php/loginCliente.html");
+header("Location: /loginvista.html");
 die();
