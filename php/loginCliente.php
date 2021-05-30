@@ -4,6 +4,17 @@ $datos = $_POST;
 $correo = $datos['correo'];
 $contraseña = $datos['password'];
 
+session_start();
+$_SESSION['nombreCompleto'] = 'indefinido';
+$_SESSION['nombre'] = 'indefinido';
+$_SESSION['apellidoPaterno'] = 'indefinido';
+$_SESSION['apellidoMaterno'] = 'indefinido';
+$_SESSION['numeroTelefonico'] = 'indefinido';
+
+// initialize session variables
+$_SESSION['idUsuario'] = '0';
+$_SESSION['correoUsuario'] = 'indefinido';
+
 $arreglo = array(
   'correoElectronico' => $correo,
   'contraseña' => $contraseña
@@ -29,6 +40,9 @@ curl_close($curl);
 $obj = json_decode($response);
 $idDevuelto = $obj->data->idcliente;
 if ($idDevuelto != 0) {
+  session_start();
+  $_SESSION['idUsuario'] = $idDevuelto;
+  $_SESSION['correoUsuario'] = $correo;
   header("Location: /index.html");
   die();
 } else {
