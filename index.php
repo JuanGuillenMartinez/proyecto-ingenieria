@@ -68,7 +68,7 @@
                                     <?php
                                     session_start();
                                     $idUsuario = $_SESSION['idUsuario'];
-                                    if ($idUsuario=="0") {
+                                    if ($idUsuario=="0" OR empty($_SESSION['idUsuario'])) {
                                         echo "Login";
                                     } else {
                                         session_start();
