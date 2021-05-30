@@ -43,7 +43,7 @@ if ($idDevuelto != 0) {
   session_start();
   $_SESSION['idUsuario'] = $idDevuelto;
   $_SESSION['correoUsuario'] = $correo;
-  header("Location: /index.html");
+  header("Location: /index.php");
   die();
 } else {
   echo "Credenciales incorrectas";
