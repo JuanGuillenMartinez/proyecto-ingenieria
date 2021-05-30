@@ -59,7 +59,7 @@
                             <li class="nav-item active"><a class="nav-link" href="index.html">Inicio</a></li>
                             <li class="nav-item"><a class="nav-link" href="l">Vuelos</a></li>
                             <li class="nav-item"><a class="nav-link" href="">Alojamiento</a></li>
-                            <li class="nav-item"><a class="nav-link" href="">Paquetes</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#paquetes">Paquetes</a></li>
                             <li class="nav-item"><a class="nav-link" href="">Autos</a></li>
                             <li class="nav-item"><a class="nav-link" href="">Traslados</a></li>
                             <li class="nav-item"><a class="nav-link" href="">Seguro de viajes</a></li>
@@ -69,7 +69,7 @@
                                     session_start();
                                     $idUsuario = $_SESSION['idUsuario'];
                                     if ($idUsuario=="0" OR empty($_SESSION['idUsuario'])) {
-                                        echo "Login";
+                                        echo "Iniciar Sesión";
                                     } else {
                                         session_start();
                                         echo $_SESSION['nombre'];
@@ -207,7 +207,7 @@
 
 
     <!-- start product Area -->
-    <section class="owl-carousel active-product-area section_gap">
+    <section id="paquetes" class="owl-carousel active-product-area section_gap">
         <!-- single product slide -->
         <div class="single-product-slider">
             <div class="container">
