@@ -57,7 +57,6 @@
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
                             <li class="nav-item active"><a class="nav-link" href="index.html">Inicio</a></li>
-                            <li class="nav-item"><a class="nav-link" href="l">Vuelos</a></li>
                             <li class="nav-item"><a class="nav-link" href="">Alojamiento</a></li>
                             <li class="nav-item"><a class="nav-link" href="#paquetes">Paquetes</a></li>
                             <li class="nav-item"><a class="nav-link" href="">Autos</a></li>
