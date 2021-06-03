@@ -34,6 +34,7 @@
 
     <link rel="stylesheet" href="css/estilos.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+    <?php include '/home/juan/Proyectos/Desarrollo web/Proyecto/php//utils/SesionCliente.php'; ?>
 </head>
 
 <body>
@@ -65,13 +66,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/loginvista.html">
                                     <?php
-                                    session_start();
-                                    $idUsuario = $_SESSION['idUsuario'];
+                                    $idUsuario = SesionCliente::obtenerInformacionSesionId('idUsuario');
                                     if ($idUsuario=="0" OR empty($_SESSION['idUsuario'])) {
                                         echo "Iniciar Sesión";
                                     } else {
-                                        session_start();
-                                        echo $_SESSION['nombre'];
+                                        echo SesionCliente::obtenerInformacionSesionId('nombre');
                                     }
                                     ?>
                                 </a>
