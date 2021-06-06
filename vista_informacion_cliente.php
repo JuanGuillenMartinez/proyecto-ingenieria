@@ -59,7 +59,7 @@
                                 url: "/php/CerrarSesionCliente.php",
                                 success: function(data) {
                                     alert(data);
-                                    $(location).attr('href', '/app/index.php');
+                                    $(location).attr('href', '/index.php');
                                 }
                             });
                         }
