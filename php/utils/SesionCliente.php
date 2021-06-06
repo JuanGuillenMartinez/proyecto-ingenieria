@@ -1,5 +1,5 @@
 <?php
-include '/home/juan/Proyectos/Desarrollo web/Proyecto/php//utils/PeticionCliente.php';
+include_once '/home/juan/Proyectos/Desarrollo web/Proyecto/php//utils/PeticionCliente.php';
 class SesionCliente
 {
     public static function abrirSesion()
