@@ -49,9 +49,21 @@
                     <li><i class="icono fas fa-user-check"></i>Correo: </li>
                     <li>
                         <input disabled id="correo" type="text" placeholder="<?php
-                                                                    echo SesionCliente::obtenerInformacionSesionId('correoUsuario');
-                                                                    ?>">
+                                                                                echo SesionCliente::obtenerInformacionSesionId('correoUsuario');
+                                                                                ?>">
                     </li>
+                    <li><button class="btnCerrarSesion" onclick="cerrarSesion()" name="btnGuardar">Cerrar Sesion</button></li>
+                    <script>
+                        function cerrarSesion() {
+                            $.ajax({
+                                url: "/php/CerrarSesionCliente.php",
+                                success: function(data) {
+                                    alert(data);
+                                    $(location).attr('href', '/index,php');
+                                }
+                            });
+                        }
+                    </script>
                 </ul>
                 <ul class="lista-datos">
                     <li><i class="icono fas fa-user-check"></i>Nombre: </li>
@@ -83,16 +95,16 @@
                             var nombre = document.getElementById("nombre").value;
                             var apellidoPaterno = document.getElementById("apellidoPaterno").value;
                             var apellidoMaterno = document.getElementById("apellidoMaterno").value;
-                            if ( telefono == "") {
+                            if (telefono == "") {
                                 telefono = document.getElementById("telefono").placeholder;
                             }
-                            if ( nombre == "") {
+                            if (nombre == "") {
                                 nombre = document.getElementById("nombre").placeholder;
                             }
-                            if ( apellidoPaterno == "") {
+                            if (apellidoPaterno == "") {
                                 apellidoPaterno = document.getElementById("apellidoPaterno").placeholder;
                             }
-                            if ( apellidoMaterno == "") {
+                            if (apellidoMaterno == "") {
                                 apellidoMaterno = document.getElementById("apellidoMaterno").placeholder;
                             }
                             var param = {
@@ -106,7 +118,7 @@
 
                             $.ajax({
                                 data: param,
-                                url: "archivo.php",
+                                url: "/php/ActualizarInformacionClientes.php",
                                 method: "post",
                                 success: function(data) {
                                     alert(data);

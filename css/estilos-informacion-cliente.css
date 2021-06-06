@@ -30,6 +30,24 @@ input {
   font-size: 14px;
 }
 
+.btnCerrarSesion {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #c51010;
+  width: 90%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.btnCerrarSesion:hover, .btnCerrarSesion:active, .btnCerrarSesion:focus {
+  background: #a53434;
+}
+
 button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
