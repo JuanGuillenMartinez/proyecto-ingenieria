@@ -1,7 +1,7 @@
 <?php
 
-include_once '/home/juan/Proyectos/Desarrollo web/Proyecto/php//utils/PeticionCliente.php';
-include_once '/home/juan/Proyectos/Desarrollo web/Proyecto/php//utils/SesionCliente.php';
+include_once '/app/php//utils/PeticionCliente.php';
+include_once '/app/php//utils/SesionCliente.php';
 
 $datos = $_POST;
 $idCliente = $datos['idCliente'];

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/estilos-informacion-cliente.css">
     <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <?php include_once '/home/juan/Proyectos/Desarrollo web/Proyecto/php//utils/SesionCliente.php'; ?>
+    <?php include_once '/app/php//utils/SesionCliente.php'; ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 </head>
 
