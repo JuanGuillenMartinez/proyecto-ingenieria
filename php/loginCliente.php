@@ -1,6 +1,6 @@
 <?php
-include_once '/app/php//utils/Peticion.php';
-include_once '/app/php//utils/SesionCliente.php';
+include_once $_SERVER['DOCUMENT_ROOT']."/php//utils/Peticion.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/php//utils/SesionCliente.php";
 
 SesionCliente::iniciarSesionVacia();
 $datos = $_POST;

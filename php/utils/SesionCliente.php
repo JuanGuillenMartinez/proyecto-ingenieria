@@ -1,5 +1,5 @@
 <?php
-include_once '/app/php//utils/PeticionCliente.php';
+include_once $_SERVER['DOCUMENT_ROOT']."/php//utils/PeticionCliente.php";
 class SesionCliente
 {
     public static function abrirSesion()

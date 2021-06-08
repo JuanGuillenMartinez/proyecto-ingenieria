@@ -1,7 +1,7 @@
 <?php
 
-include_once '/app/php//utils/PeticionCliente.php';
-include_once '/app/php//utils/SesionCliente.php';
+include_once $_SERVER['DOCUMENT_ROOT']."/php//utils/PeticionCliente.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/php//utils/SesionCliente.php";
 
 $datos = $_POST;
 $idCliente = $datos['idCliente'];

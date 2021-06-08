@@ -34,7 +34,7 @@
 
     <link rel="stylesheet" href="css/estilos.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
-    <?php include_once '/app/php//utils/SesionCliente.php'; ?>
+    <?php include_once $_SERVER['DOCUMENT_ROOT']."/php//utils/SesionCliente.php"; ?>
 </head>
 
 <body>
