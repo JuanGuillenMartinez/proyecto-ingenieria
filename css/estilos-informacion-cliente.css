@@ -18,6 +18,7 @@ body {
   font-family: "Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
   background-image: url(/media/imagen.jpg);
 }
+
 input {
   font-family: "Roboto", sans-serif;
   outline: 0;

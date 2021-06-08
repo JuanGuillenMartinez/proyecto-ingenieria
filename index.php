@@ -36,6 +36,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
     <?php include_once $_SERVER['DOCUMENT_ROOT'] . "/php//utils/SesionCliente.php"; ?>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
 
 </head>
 
@@ -210,15 +213,26 @@
     <section id="paquetes" class="xd">
         <!-- single product slide -->
 
-        <div class="bxslider">
-            <div><img src="/img/paquetes/china.png" title="Funky roots"></div>
-            <div><img src="/img/paquetes/china.png" title="The long and winding road"></div>
-            <div><img src="/img/paquetes/china.png" title="Happy trees"></div>
-        </div>
+        <ul class="bxslider">
+            
+        </ul>
 
     </section>
     <!-- end product Area -->
+    <script>
+        $(function() {
+            $('.bxslider').bxSlider({
+                mode: 'fade',
+                captions: true,
+                adaptiveHeight: true
+            });
+        });
 
+        for (var i = 0; i <= 5; i++) {
+            var image = $('<li><img src="img/paquetes/china.png" title="hola"></li>');
+            $('.bxslider').append(image);
+        }
+    </script>
     <!-- Start exclusive deal Area -->
     <section class="exclusive-deal-area">
         <div class="container-fluid">
