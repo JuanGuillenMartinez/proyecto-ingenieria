@@ -214,25 +214,48 @@
         <!-- single product slide -->
 
         <ul class="bxslider">
-            
+
         </ul>
 
     </section>
     <!-- end product Area -->
     <script>
-        $(function() {
-            $('.bxslider').bxSlider({
-                mode: 'fade',
-                captions: true,
-                adaptiveHeight: true
+        function llenarCarrusel(arreglo) {
+            $(function() {
+                $('.bxslider').bxSlider({
+                    mode: 'fade',
+                    captions: true
+                });
             });
-        });
 
-        for (var i = 0; i <= 5; i++) {
-            var image = $('<li><img src="img/paquetes/china.png" title="hola"></li>');
-            $('.bxslider').append(image);
+            arreglo.forEach(function(value) {
+                var nombrePaquete = value.nombre_paquete;
+                var img = value.url_imagen;
+                var list = $('<li><img width="800px" height="500px" src="' + img + '" title="' + nombrePaquete + '"></li>');
+                $('.bxslider').append(list);
+            });
         }
     </script>
+
+    <script>
+        $.ajax({
+            url: "/php/ObtenerPaquetes.php",
+            success: function(data) {
+                var obj = JSON.parse(data);
+                llenarCarrusel(obj.data);
+            }
+        });
+    </script>
+
+    <style>
+        .bx-wrapper img {
+            margin: 0 auto;
+        }
+
+        .bx-wrapper title {
+            margin: 0 auto;
+        }
+    </style>
     <!-- Start exclusive deal Area -->
     <section class="exclusive-deal-area">
         <div class="container-fluid">
