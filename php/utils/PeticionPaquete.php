@@ -13,5 +13,12 @@
             return $respuesta;
         }
 
+        public function obtenerPaquetePorId($id) {
+            $peticion = new Peticion();
+            $datos = array('idPaquete' => $id);
+            $respuesta = $peticion->consumirPeticionPost("https://proyecto-ing.herokuapp.com/apis/paquete/post/obtener_informacion_paquete_id.php", $datos);
+            return $respuesta;
+        }
+
     }
 ?>

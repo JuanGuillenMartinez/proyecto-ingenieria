@@ -31,14 +31,9 @@
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-
     <link rel="stylesheet" href="css/estilos.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
-    <?php include_once $_SERVER['DOCUMENT_ROOT'] . "/php//utils/SesionCliente.php"; ?>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-
+    <?php include_once $_SERVER['DOCUMENT_ROOT'] . "/php//utils/SesionCliente.php"; ?>
 
 </head>
 
@@ -157,7 +152,48 @@
         </div>
     </section>
     <!-- End banner Area -->
-
+    
+    <!-- modal informacion paquete -->
+    <div class="modal fade" id="modalInformacionPaquete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="titulo-modal" class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row justify-content-center form-group">
+                            <img id="img-paquete-modal" src="" alt="imagen del paquete" width="200" height="140px">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nombre del paquete</label>
+                            <input id="input-nombre-paquete" size="5" readonly="true" type="text" class="form-control" aria-describedby="emailHelp" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Origen</label>
+                            <input id="input-origen" readonly="true" type="text" class="form-control" aria-describedby="emailHelp" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Destino</label>
+                            <input id="input-destino" readonly="true" type="text" class="form-control" aria-describedby="emailHelp" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Precio del paquete</label>
+                            <input id="input-precio" readonly="true" type="text" class="form-control" aria-describedby="emailHelp" placeholder="">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- fin modal informacion paquete -->
     <!--  -->
     <section class="features-area section_gap">
         <div class="container">
@@ -207,47 +243,20 @@
     </section>
     <!-- end features Area -->
 
-
-
     <!-- start product Area -->
     <section id="paquetes" class="xd">
         <!-- single product slide -->
-
         <ul class="bxslider">
 
         </ul>
 
     </section>
     <!-- end product Area -->
-    <script>
-        function llenarCarrusel(arreglo) {
-            $(function() {
-                $('.bxslider').bxSlider({
-                    mode: 'fade',
-                    captions: true
-                });
-            });
-
-            arreglo.forEach(function(value) {
-                var nombrePaquete = value.nombre_paquete;
-                var img = value.url_imagen;
-                var list = $('<li><img width="800px" height="500px" src="' + img + '" title="' + nombrePaquete + '"></li>');
-                $('.bxslider').append(list);
-            });
-        }
-    </script>
-
-    <script>
-        $.ajax({
-            url: "/php/ObtenerPaquetes.php",
-            success: function(data) {
-                var obj = JSON.parse(data);
-                llenarCarrusel(obj.data);
-            }
-        });
-    </script>
 
     <style>
+        .modal-title {
+            color: black;
+        }
         .bx-wrapper img {
             margin: 0 auto;
         }
@@ -293,7 +302,8 @@
 
 
                     <!-- End footer Area -->
-
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+                    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
                     <script src="js/vendor/bootstrap.min.js"></script>
                     <script src="js/jquery.ajaxchimp.min.js"></script>
@@ -307,6 +317,7 @@
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
                     <script src="js/gmaps.min.js"></script>
                     <script src="js/main.js"></script>
+                    <script src="js/functions.js"></script>
 </body>
 
 </html>
