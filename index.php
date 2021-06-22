@@ -79,7 +79,7 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item">
-                                <a href="#" class="cart"><span class="ti-bag"></span></a>
+                                <a href="/cart.html" class="cart"><span class="ti-bag"></span></a>
                             </li>
                             <li class="nav-item">
                                 <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
@@ -188,7 +188,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Agregar al carrito</button>
+                    <button id="btnAgregarCarrito" type="button" class="btn btn-primary">Agregar al carrito</button>
                 </div>
             </div>
         </div>

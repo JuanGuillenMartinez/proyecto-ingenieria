@@ -1,6 +1,7 @@
 $(document).ready(function() {
     mostrarCarruselPaquetes();
     escucharCarrusel();
+    agregarPaqueteCarrito();
 });
 
 function iniciarCarrusel() {
@@ -49,6 +50,7 @@ function mostrarInformacionPaqueteId(id) {
             var respuesta = JSON.parse(response);
             var paquete = respuesta.data;
             $("#img-paquete-modal").attr("src", paquete.url_imagen);
+            $("#img-paquete-modal").attr("alt", paquete.id_paquete);
             $("#titulo-modal").html(paquete.nombre_paquete);
             $("#input-nombre-paquete").val(paquete.nombre_paquete);
             $("#input-origen").val(paquete.origen_vuelo);
@@ -56,5 +58,22 @@ function mostrarInformacionPaqueteId(id) {
             $("#input-precio").val(paquete.precio_paquete);
             $('#modalInformacionPaquete').modal('show');
         },
+    });
+}
+function agregarPaqueteCarrito() {    
+    $("btnAgregarCarrito").on("click", function(e) {
+        var id = $("#img-paquete-modal").attr("alt");
+        alert(id);
+        $.ajax({
+            url: "/php/AgregarPaqueteCarrito.php",
+            type: "POST",
+            async: true,
+            data: {
+                idPaquete: id
+            },
+            success: function (response) {
+                alert("Paquete agregado correctamente");
+            },
+        });
     });
 }
