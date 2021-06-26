@@ -22,7 +22,7 @@
 
     <!-- Left Column / Headphones Image -->
     <div class="left-column">
-      <img src="/img/paquetes/corea.jpg" alt="">
+      <img id="imgCart" src="" alt="">
       <!-- <img src="/img/paquetes/china.png">
       <img data-image="img" src="/img/paquetes/colombia.jpg" alt=""> -->
     </div>
@@ -36,23 +36,23 @@
         <span>Carro de compras</span>
         <i class="icono fas fa-shopping-cart"></i>
         <h1 id="lblNombrePaquete">Nombre Paquete</h1>
-        <p>Descripcion paquete:
+        <p>Detalles de pago
         </p>
       </div>
 
       <div class="perfil-paquete-footer">
         <ul class="lista-datos">
           <li><i class="icono  fas fa-dollar-sign"></i>Precio Paquete</li>
-          <input type="text" placeholder="Subtotal">
+          <input id="inputPrecioPaquete" readonly="true" type="text" placeholder="Subtotal">
 
           <li><i class="icono  fas fa-dollar-sign"></i>Subtotal</li>
-          <input type="text" placeholder="Subtotal">
+          <input id="inputSubtotal" readonly="true" type="text" placeholder="Subtotal">
 
           <li><i class="icono fas fa-dollar-sign"></i>Descuento</li>
-          <input type="text" placeholder="Descuento">
+          <input id="inputDescuento" readonly="true" type="text" placeholder="Descuento">
 
           <li><i class="icono  fas fa-dollar-sign"></i>Total</li>
-          <input type="text" placeholder="Total">
+          <input id="inputTotal" readonly="true" type="text" placeholder="Total">
 
       </div>
       <!-- Product Pricing -->
@@ -64,7 +64,8 @@
   </main>
 
   <!-- Scripts -->
-<script src="/js/cart-functions.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="/js/cart-functions.js"></script>
 </body>
 
 </html>

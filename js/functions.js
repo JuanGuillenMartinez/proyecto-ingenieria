@@ -1,7 +1,6 @@
 $(document).ready(function() {
     mostrarCarruselPaquetes();
     escucharCarrusel();
-    agregarPaqueteCarrito();
 });
 
 function iniciarCarrusel() {
@@ -61,9 +60,7 @@ function mostrarInformacionPaqueteId(id) {
     });
 }
 function agregarPaqueteCarrito() {    
-    $("btnAgregarCarrito").on("click", function(e) {
         var id = $("#img-paquete-modal").attr("alt");
-        alert(id);
         $.ajax({
             url: "/php/AgregarPaqueteCarrito.php",
             type: "POST",
@@ -75,5 +72,4 @@ function agregarPaqueteCarrito() {
                 alert("Paquete agregado correctamente");
             },
         });
-    });
 }
