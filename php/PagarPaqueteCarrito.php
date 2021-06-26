@@ -7,7 +7,7 @@
         "idCliente" => $idCliente
     );
     $peticion = new Peticion();
-    $respuesta = $peticion->consumirPeticionPost("https://proyecto-ing.herokuapp.com/apis/carrito/post/obtener_carrito_id.php", $datos);
+    $respuesta = $peticion->consumirPeticionPost("https://proyecto-ing.herokuapp.com/apis/carrito/post/modificar_estatus_carrito_id.php", $datos);
     
     echo $respuesta;
     

@@ -1,15 +1,10 @@
 $(document).ready(function() {
-    obtenerIdPaqueteCarrito();
+    mostrarPaqueteCarrito();
 });
-function mostrarPaqueteCarrito(id) {
-    var id = id;
+function mostrarPaqueteCarrito() {
     $.ajax({
-        url: "/php/ObtenerPaqueteId.php",
-        type: "POST",
+        url: "/php/ObtenerPaqueteCarritoId.php",
         async: true,
-        data: {
-            idPaquete: id
-        },
         success: function (response) {
             var respuesta = JSON.parse(response);
             var paquete = respuesta.data;
@@ -17,19 +12,9 @@ function mostrarPaqueteCarrito(id) {
             $("#lblNombrePaquete").html(paquete.nombre_paquete);
             $("#inputPrecioPaquete").val(paquete.precio_paquete);
             $("#inputSubtotal").val(paquete.precio_paquete);
-            $("#inputDescuento").val(paquete.precio);
+            $("#inputDescuento").val(paquete.descuento);
             $("#inputTotal").val(paquete.precio_final);
+            $("#precio_pagar").html("$"+paquete.precio_final);
         },
-    });
-}
-function obtenerIdPaqueteCarrito() {
-    $.ajax({
-        url: "/php/ObtenerPaqueteCarritoId.php",
-        async: true,
-        success: function (response) {
-            var respuesta = JSON.parse(response);
-            var id = respuesta.id;
-            mostrarPaqueteCarrito(id);
-        }
     });
 }

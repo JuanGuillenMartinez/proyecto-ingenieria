@@ -1,3 +1,4 @@
+var contadorCarrito = 1;
 $(document).ready(function() {
     mostrarCarruselPaquetes();
     escucharCarrusel();
@@ -59,7 +60,10 @@ function mostrarInformacionPaqueteId(id) {
         },
     });
 }
-function agregarPaqueteCarrito() {    
+function agregarPaqueteCarrito() {
+    if(contadorCarrito>1) {
+        alert("Solo se puede agregar un paquete al carrito");
+    } else {
         var id = $("#img-paquete-modal").attr("alt");
         $.ajax({
             url: "/php/AgregarPaqueteCarrito.php",
@@ -70,6 +74,8 @@ function agregarPaqueteCarrito() {
             },
             success: function (response) {
                 alert("Paquete agregado correctamente");
+                contadorCarrito++;
             },
         });
+    }
 }

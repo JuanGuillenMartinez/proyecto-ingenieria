@@ -1,7 +1,17 @@
 $("#enviar").on("click",function(e) {
-    alert("Pago hecho correctamente");
-    document.location.href = '/index.php';
+    pagarCarrito();
 });
+function pagarCarrito() {
+    $.ajax({
+        url: "/php/PagarPaqueteCarrito.php",
+        async: true,
+        success: function (response) {
+            var respuesta = JSON.parse(response);
+            alert(respuesta.estado);
+            document.location.href = '/index.php';
+        },
+    });
+}
 window.onload = function () {
 
     const name = document.getElementById('name');

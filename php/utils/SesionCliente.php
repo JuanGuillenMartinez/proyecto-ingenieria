@@ -63,16 +63,4 @@ class SesionCliente
         return $dato;
     }
 
-    public static function guardarPaqueteCarrito($id) {
-        SesionCliente::abrirSesion();
-        $_SESSION['idPaqueteCarrito'] = 0;
-        $_SESSION['idPaqueteCarrito'] = $id;
-    }
-
-    public static function obtenerIdPaqueteCarrito() {
-        SesionCliente::abrirSesion();
-        $dato = $_SESSION['idPaqueteCarrito'];
-        return $dato;
-    }
-
 }
