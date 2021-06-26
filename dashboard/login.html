@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+        content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="/css/estilosformulario.css">
+</head>
+
+<body>
+    <form onsubmit="return false" class="formulario">
+        <h1>Login de Administradores</h1>
+        <div class="contenedor">
+            <div class="input-contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input id="correoEmpleado" name="correo" type="email" placeholder="Correo Electrónico">
+            </div>
+            <div class="input-contenedor">
+                <i class="fas fa-key icon"></i>
+                <input id="contraseñaEmpleado" name="password" type="password" placeholder="Contraseña">
+            </div>
+            <button id="btnLogin" class="button">Login</button>
+        </div>
+        
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/dashboard/js/functions-login.js"></script>
+</body>
+
+</html>
