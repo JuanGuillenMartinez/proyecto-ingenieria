@@ -1,12 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
+
 <body>
-    
+    <section class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-dark bg-dark">
+                    <a class="navbar-brand">Paquetes</a>
+                    <div class="form-inline">
+                        <input id="txtSearch" class="form-control mr-sm-2" type="search" placeholder="Buscar"
+                            aria-label="Search">
+                        <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0"
+                            type="button">Buscar</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col col-md-12">
+                <button id="btnNuevoRegistro" type="button" class="btn btn-primary float-right" data-toggle="modal"
+                    data-target="#modalInformacion">Ingresar</button>
+                <div>
+                    <table id="tblContact" class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="table-success">#</th>
+                                <th scope="col" class="table-success">ID paquete</th>
+                                <th scope="col" class="table-success">Nombre</th>
+                                <th scope="col" class="table-success">Precio</th>
+                                <th scope="col" class="table-success">Precio final</th>
+                                <th scope="col" class="table-success">Descuento</th>
+                                <th scope="col" class="table-success">URL imagen</th>
+                                <th scope="col" class="table-success">Aerolínea</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rowsContact">
+                            <tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="modals">
+        <!-- Modal Información -->
+        <div class="modal fade" id="modalInformacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Información</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="titulo-id-noticia">ID de la noticia</label>
+                                <input readonly="true" type="text" class="form-control" id="inputIdNoticia"
+                                    placeholder="ID">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-noticia">Titulo de la noticia</label>
+                                <input type="text" class="form-control" id="inputTitulo" placeholder="Titulo">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-descripcion">Descripción de la noticia</label>
+                                <input type="text" class="form-control" id="inputDescripcion"
+                                    placeholder="Descripción de la noticia">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-encabezado">Encabezado de la noticia</label>
+                                <input type="text" class="form-control" id="inputEncabezado"
+                                    placeholder="Encabezado de la noticia">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-usuario">Usuario</label>
+                                <input type="text" class="form-control" id="inputUsuario" placeholder="Usuario">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-fecha-publicacion">Fecha de publicación</label>
+                                <input type="text" class="form-control" id="inputFechaPublicacion"
+                                    placeholder="Encabezado de la noticia">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-etiqueta">Etiquetas</label>
+                                <input type="text" class="form-control" id="inputEtiqueta" placeholder="Etiquetas">
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Editar</label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button id="btnModalEditar" type="button" disabled="true" class="btn btn btn-dark">Guardar
+                            Cambios</button>
+                        <button id="btnModalEliminar" type="button" disabled="true"
+                            class="btn btn-danger">Eliminar</button>
+                        <button id="btnModalGuardar" type="button" disabled="true"
+                            class="btn btn-primary">Registrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
 </body>
+
 </html>
