@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
@@ -34,13 +35,14 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="table-success">#</th>
-                                <th scope="col" class="table-success">ID paquete</th>
                                 <th scope="col" class="table-success">Nombre</th>
                                 <th scope="col" class="table-success">Precio</th>
                                 <th scope="col" class="table-success">Precio final</th>
                                 <th scope="col" class="table-success">Descuento</th>
-                                <th scope="col" class="table-success">URL imagen</th>
                                 <th scope="col" class="table-success">Aerolínea</th>
+                                <th scope="col" class="table-success">Origen</th>
+                                <th scope="col" class="table-success">Destino</th>
+                                <th scope="col" class="table-success">Información</th>
                             </tr>
                         </thead>
                         <tbody id="rowsContact">
@@ -67,41 +69,63 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="form-group">
-                                <label for="titulo-id-noticia">ID de la noticia</label>
-                                <input readonly="true" type="text" class="form-control" id="inputIdNoticia"
-                                    placeholder="ID">
-                            </div>
-                            <div class="form-group">
-                                <label for="titulo-noticia">Titulo de la noticia</label>
-                                <input type="text" class="form-control" id="inputTitulo" placeholder="Titulo">
-                            </div>
-                            <div class="form-group">
-                                <label for="titulo-descripcion">Descripción de la noticia</label>
-                                <input type="text" class="form-control" id="inputDescripcion"
-                                    placeholder="Descripción de la noticia">
-                            </div>
-                            <div class="form-group">
-                                <label for="titulo-encabezado">Encabezado de la noticia</label>
-                                <input type="text" class="form-control" id="inputEncabezado"
-                                    placeholder="Encabezado de la noticia">
-                            </div>
-                            <div class="form-group">
-                                <label for="titulo-usuario">Usuario</label>
-                                <input type="text" class="form-control" id="inputUsuario" placeholder="Usuario">
-                            </div>
-                            <div class="form-group">
-                                <label for="titulo-fecha-publicacion">Fecha de publicación</label>
-                                <input type="text" class="form-control" id="inputFechaPublicacion"
-                                    placeholder="Encabezado de la noticia">
-                            </div>
-                            <div class="form-group">
-                                <label for="titulo-etiqueta">Etiquetas</label>
-                                <input type="text" class="form-control" id="inputEtiqueta" placeholder="Etiquetas">
+                            <div class="row justify-content-center form-group">
+                                <img id="img-paquete-modal" src="" alt="imagen del paquete" width="200" height="140px">
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <input type="checkbox" class="form-check-input" id="checkboxEditar">
                                 <label class="form-check-label" for="exampleCheck1">Editar</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-id-noticia">ID del paquete</label>
+                                <input readonly="true" type="text" class="form-control" id="inputIdPaquete">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-noticia">Nombre</label>
+                                <input type="text" class="form-control" id="inputNombre">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-descripcion">Precio del paquete</label>
+                                <input type="text" class="form-control" id="inputPrecioPaquete">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-encabezado">Precio final</label>
+                                <input type="text" class="form-control" id="inputPrecioFinal">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-usuario">Descuento</label>
+                                <input type="text" class="form-control" id="inputDescuento">
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="form-group">
+                                <label for="titulo-fecha-publicacion">Aerolínea</label>
+                                <input type="text" class="form-control" id="inputAerolinea">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-etiqueta">Origen</label>
+                                <input type="text" class="form-control" id="inputOrigen">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-etiqueta">Destino</label>
+                                <input type="text" class="form-control" id="inputDestino">
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="form-group">
+                                <label for="titulo-etiqueta">Alojamiento</label>
+                                <input type="text" class="form-control" id="inputAlojamiento">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-etiqueta">Precio por noche</label>
+                                <input type="text" class="form-control" id="inputPrecioNoche">
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="form-group">
+                                <label for="titulo-etiqueta">Traslado</label>
+                                <input type="text" class="form-control" id="inputTraslado">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo-etiqueta">Destino del traslado</label>
+                                <input type="text" class="form-control" id="inputDestinoTraslado">
                             </div>
                         </form>
                     </div>
@@ -126,7 +150,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="/dashboard/js/functions-dashboard.js"></script>
 </body>
 
 </html>

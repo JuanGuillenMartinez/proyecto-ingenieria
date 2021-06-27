@@ -1,24 +1,25 @@
 function mostrarRegistroId(id) {
     $.ajax({
-        url: "/php/ColeccionNoticias.php",
+        url: "/php/ObtenerPaqueteId.php",
         method: "POST",
         async: true,
         data: {
-            intent: "buscarId",
-            idNoticia: id,
+            idPaquete: id,
         },
         success: function (response) {
-            var objNoticia = JSON.parse(response);
+            var respuesta = JSON.parse(response);
+            var element = respuesta.data; 
             var noticiaHtml = `<tr>
-                                        <td scope="row">${objNoticia[0]}</td>
-                                        <td>${objNoticia[1]}</td>
-                                        <td>${objNoticia[2]}</td>
-                                        <td>${objNoticia[3]}</td>
-                                        <td>${objNoticia[4]}</td>
-                                        <td>${objNoticia[5]}</td>
-                                        <td>${objNoticia[6]}</td>
-                                        <td><button type="button" class="btn btn-info">Información</button></td>
-                                    </tr>`;
+                                        <td scope="row">${element.id_paquete}</td>
+                                        <td>${element.nombre_paquete}</td>
+                                        <td>${element.precio_paquete}</td>
+                                        <td>${element.precio_final}</td>
+                                        <td>${element.descuento}</td>
+                                        <td>${element.aerolinea}</td>
+                                        <td>${element.origen_vuelo}</td>
+                                        <td>${element.destino_vuelo}</td>
+                                        <td><button id="btnInformacion" type="button" class="btn btn-info" data-toggle="modal" data-target="#modalInformacion">Información</button></td>
+                                        </tr>`;
             $("#rowsContact").html(noticiaHtml);
         },
     });
@@ -26,23 +27,21 @@ function mostrarRegistroId(id) {
 
 function mostrarRegistros() {
     $.ajax({
-        url: "/php/ColeccionNoticias.php",
+        url: "/php/ObtenerPaquetes.php",
         method: "POST",
         async: true,
-        data: {
-            intent: "mostrar",
-        },
         success: function (response) {
-            var noticias = JSON.parse(response);
-            noticias.forEach((element) => {
+            var registros = JSON.parse(response);
+            registros.data.forEach((element) => {
                 var noticiaHtml = `<tr>
-                                        <td scope="row">${element._id}</td>
-                                        <td>${element.titulo}</td>
-                                        <td>${element.descripcion}</td>
-                                        <td>${element.encabezado}</td>
-                                        <td>${element.usuario}</td>
-                                        <td>${element.fechaPublicacion}</td>
-                                        <td>${element.etiquetas}</td>
+                                        <td scope="row">${element.id_paquete}</td>
+                                        <td>${element.nombre_paquete}</td>
+                                        <td>${element.precio_paquete}</td>
+                                        <td>${element.precio_final}</td>
+                                        <td>${element.descuento}</td>
+                                        <td>${element.aerolinea}</td>
+                                        <td>${element.origen_vuelo}</td>
+                                        <td>${element.destino_vuelo}</td>
                                         <td><button id="btnInformacion" type="button" class="btn btn-info" data-toggle="modal" data-target="#modalInformacion">Información</button></td>
                                         </tr>`;
                 $("#rowsContact").append(noticiaHtml);
