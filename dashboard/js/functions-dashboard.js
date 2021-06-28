@@ -1,3 +1,14 @@
+$(document).ready(function () {
+    mostrarRegistros();
+    escucharBotonIngresar();
+    escucharBotonBuscar();
+    escucharBotonInformacion();
+    escucharBotonGuardar();
+    escucharBotonEliminar();
+    escucharBotonEditar();
+    escucharCheckbox();
+});
+
 function mostrarRegistroId(id) {
     $.ajax({
         url: "/php/ObtenerPaqueteId.php",
@@ -8,7 +19,7 @@ function mostrarRegistroId(id) {
         },
         success: function (response) {
             var respuesta = JSON.parse(response);
-            var element = respuesta.data; 
+            var element = respuesta.data;
             var noticiaHtml = `<tr>
                                         <td scope="row">${element.id_paquete}</td>
                                         <td>${element.nombre_paquete}</td>
@@ -81,24 +92,30 @@ function guardarRegistro() {
 }
 
 function mostrarInformacionRegistro(id) {
+    obtenerVuelos();
     $.ajax({
-        url: "/php/ColeccionNoticias.php",
+        url: "/php/ObtenerPaqueteId.php",
         method: "POST",
-        async: true,
+        async: false,
         data: {
-            intent: "buscarId",
-            idNoticia: id,
+            idPaquete: id,
         },
         success: function (response) {
-            var objNoticia = JSON.parse(response);
-            $("#btnModalEliminar").attr("disabled", false);
-            $("#inputIdNoticia").val(objNoticia[0]);
-            $("#inputTitulo").val(objNoticia[1]);
-            $("#inputDescripcion").val(objNoticia[2]);
-            $("#inputEncabezado").val(objNoticia[3]);
-            $("#inputUsuario").val(objNoticia[4]);
-            $("#inputFechaPublicacion").val(objNoticia[5]);
-            $("#inputEtiqueta").val(objNoticia[6]);
+            var respuesta = JSON.parse(response);
+            var arrayRegistro = respuesta.data;
+            $("#img-paquete-modal").attr("src", arrayRegistro.url_imagen);
+            $("#inputIdPaquete").val(arrayRegistro.id_paquete);
+            $("#inputNombre").val(arrayRegistro.nombre_paquete);
+            $("#inputPrecioPaquete").val(arrayRegistro.precio_paquete);
+            $("#inputPrecioFinal").val(arrayRegistro.precio_final);
+            $("#inputDescuento").val(arrayRegistro.descuento);
+            $("#dropdownAerolinea").html(arrayRegistro.aerolinea);
+            $("#inputOrigen").val(arrayRegistro.origen_vuelo);
+            $("#inputDestino").val(arrayRegistro.destino_vuelo);
+            $("#inputAlojamiento").val(arrayRegistro.nombre_alojamiento);
+            $("#inputPrecioNoche").val(arrayRegistro.precio_noche);
+            $("#inputTraslado").val(arrayRegistro.modelo_auto);
+            $("#inputDestinoTraslado").val(arrayRegistro.destino_traslado);
         },
     });
 }
@@ -155,16 +172,22 @@ function eliminarRegistro(id) {
 
 function escucharBotonInformacion() {
     $("#rowsContact").on("click", "#btnInformacion", function (e) {
-        deshabilitarBotones();
         e.preventDefault(); // cancela el evento por defecto ***MUY IMPORTANTE PARA EL FUNCIONAMIENTO**
+        $(this).html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`);
+        limpiarInput();
+        deshabilitarBotones();
+        habilitarBoton("#btnModalEliminar");
+        habilitarBoton("#checkboxEditar");
+        $("#img-paquete-modal").attr("height", "140px");
         var filaActual = $(this).closest("tr"); // obtiene la fila actual
         var id = filaActual.find("td:eq(0)").text(); // obtiene el valor del primer TD de la fila actual
         mostrarInformacionRegistro(id);
+        $(this).html("Informacion");
     });
 }
 
 function escucharBotonEliminar() {
-    $("#btnModalEliminar").click(function() {
+    $("#btnModalEliminar").click(function () {
         let id = $("#inputIdNoticia").val();
         eliminarRegistro(id);
     });
@@ -186,9 +209,10 @@ function escucharBotonEditar() {
     });
 }
 function escucharCheckbox() {
-    $("#exampleCheck1").click(function () {
-        if($("#exampleCheck1").is(":checked")) {
-            $("#btnModalEditar").attr("disabled", false);
+    $("#checkboxEditar").click(function () {
+        if ($("#checkboxEditar").is(":checked")) {
+            habilitarBoton("#btnModalEditar");
+            
         } else {
             $("#btnModalEditar").attr("disabled", true);
         }
@@ -197,29 +221,61 @@ function escucharCheckbox() {
 function escucharBotonIngresar() {
     $("#btnNuevoRegistro").click(function () {
         deshabilitarBotones();
+        deshabilitarBoton("#checkboxEditar");
         $("#btnModalGuardar").attr("disabled", false);
-        $("#inputIdNoticia").val("");
-        $("#inputTitulo").val("");
-        $("#inputDescripcion").val("");
-        $("#inputEncabezado").val("");
-        $("#inputUsuario").val("");
-        $("#inputFechaPublicacion").val("");
-        $("#inputEtiqueta").val("");
+        limpiarInput();
     });
 }
 function deshabilitarBotones() {
-    $("#btnModalEditar").attr("disabled", true);
-    $("#btnModalEliminar").attr("disabled", true);
-    $("#btnModalGuardar").attr("disabled", true);
+    deshabilitarBoton("#btnModalEditar");
+    deshabilitarBoton("#btnModalEliminar");
+    deshabilitarBoton("#btnModalGuardar");
+}
+function deshabilitarBoton(nombreBoton) {
+    $(nombreBoton).attr("disabled", true);
+}
+function habilitarBoton(nombreBoton) {
+    $(nombreBoton).attr("disabled", false);
 }
 
-$(document).ready(function () {
-    mostrarRegistros();
-    escucharBotonIngresar();
-    escucharBotonBuscar();
-    escucharBotonInformacion();
-    escucharBotonGuardar();
-    escucharBotonEliminar();
-    escucharBotonEditar();
-    escucharCheckbox();
-});
+function obtenerVuelos() {
+    $.ajax({
+        url: "/php/ObtenerVuelos.php",
+        async: true,
+        success: function (response) {
+            var respuesta = JSON.parse(response);
+            var arrayVuelos = respuesta.data;
+            llenarDropdown(arrayVuelos);
+        },
+    });
+}
+
+function llenarInfoVueloForm(origen, destino, descripcion) {
+    $("#dropdownAerolinea").html(descripcion);
+    $("#inputOrigen").val(origen);
+    $("#inputDestino").val(destino);
+}
+
+function llenarDropdown(arreglo) {
+    arreglo.forEach((element) => {
+        var objDropdown = `<span class="dropdown-item" onclick="llenarInfoVueloForm('${element.origen}', '${element.destino}', '${element.descripcion}')" value="${element.idvuelo}">${element.descripcion}</span>`;
+        $("#dropdown-vuelos").append(objDropdown);
+    });
+}
+
+function limpiarInput() {
+    $("#img-paquete-modal").attr("src", "/media/btnload.png");
+    $("#img-paquete-modal").attr("height", "200");
+    $("#inputIdPaquete").val("");
+    $("#inputNombre").val("");
+    $("#inputPrecioPaquete").val("");
+    $("#inputPrecioFinal").val("");
+    $("#inputDescuento").val("");
+    $("#dropdownAerolinea").val("");
+    $("#inputOrigen").val("");
+    $("#inputDestino").val("");
+    $("#inputAlojamiento").val("");
+    $("#inputPrecioNoche").val("");
+    $("#inputTraslado").val("");
+    $("#inputDestinoTraslado").val("");
+}
