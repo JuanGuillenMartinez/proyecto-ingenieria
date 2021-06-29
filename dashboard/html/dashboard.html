@@ -79,23 +79,23 @@
                             </div>
                             <div class="form-group">
                                 <label for="titulo-id-noticia">ID del paquete</label>
-                                <input readonly="true" type="text" class="form-control" id="inputIdPaquete">
+                                <input readonly="true" type="number" class="form-control" id="inputIdPaquete">
                             </div>
                             <div class="form-group">
                                 <label for="titulo-noticia">Nombre</label>
-                                <input type="text" class="form-control" id="inputNombre">
+                                <input readonly="true" type="text" class="form-control" id="inputNombre">
                             </div>
                             <div class="form-group">
                                 <label for="titulo-descripcion">Precio del paquete</label>
-                                <input type="text" class="form-control" id="inputPrecioPaquete">
+                                <input readonly="true" type="number" class="form-control" id="inputPrecioPaquete">
                             </div>
                             <div class="form-group">
                                 <label for="titulo-encabezado">Precio final</label>
-                                <input type="text" class="form-control" id="inputPrecioFinal">
+                                <input readonly="true" type="number" class="form-control" id="inputPrecioFinal">
                             </div>
                             <div class="form-group">
                                 <label for="titulo-usuario">Descuento</label>
-                                <input type="text" class="form-control" id="inputDescuento">
+                                <input readonly="true" type="number" class="form-control" id="inputDescuento">
                             </div>
                             <div class="dropdown-divider"></div>                    
                             <div class="dropdown dropleft form-group">
@@ -107,16 +107,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="titulo-etiqueta">Origen</label>
-                                <input type="text" class="form-control" id="inputOrigen">
+                                <input readonly="true" type="text" class="form-control" id="inputOrigen">
                             </div>
                             <div class="form-group">
                                 <label for="titulo-etiqueta">Destino</label>
-                                <input type="text" class="form-control" id="inputDestino">
+                                <input readonly="true" type="text" class="form-control" id="inputDestino">
                             </div>
                             <div class="dropdown-divider"></div>
                           
                             <div class="dropdown dropleft form-group">
-                                <label for="titulo-etiqueta">Aerolínea</label>
+                                <label for="titulo-etiqueta">Alojamiento</label>
                                 <button disabled="true" class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownAlojamiento"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alojamiento</button>
                                 <div id="dropdown-alojamientos" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -124,21 +124,21 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="titulo-etiqueta">Alojamiento</label>
-                                <input type="text" class="form-control" id="inputAlojamiento">
-                            </div>
-                            <div class="form-group">
                                 <label for="titulo-etiqueta">Precio por noche</label>
-                                <input type="text" class="form-control" id="inputPrecioNoche">
+                                <input readonly="true" type="numeric" class="form-control" id="inputPrecioNoche">
                             </div>
-                            <div class="dropdown-divider"></div>
-                            <div class="form-group">
+
+                            <div class="dropdown dropleft form-group">
                                 <label for="titulo-etiqueta">Traslado</label>
-                                <input type="text" class="form-control" id="inputTraslado">
+                                <button disabled="true" class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownTraslado"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Traslado</button>
+                                <div id="dropdown-traslado" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="titulo-etiqueta">Destino del traslado</label>
-                                <input type="text" class="form-control" id="inputDestinoTraslado">
+                                <input readonly="true" type="text" class="form-control" id="inputDestinoTraslado">
                             </div>
                         </form>
                     </div>
@@ -165,7 +165,7 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="/dashboard/js/functions-dashboard.js"></script>
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
-    <script src="/dashboard/js/functions-cloud.js"></script>
+    <script src="/dashboard/js/functions-cloudinary.js"></script>
 </body>
 
 </html>

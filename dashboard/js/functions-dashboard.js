@@ -1,3 +1,6 @@
+var idVueloForm = 0;
+var idAlojamientoForm = 0;
+var idTrasladoForm = 0;
 $(document).ready(function () {
     mostrarRegistros();
     escucharBotonIngresar();
@@ -62,24 +65,27 @@ function mostrarRegistros() {
 }
 
 function guardarRegistro() {
-    var titulo = $("#inputTitulo").val();
-    var descripcion = $("#inputDescripcion").val();
-    var encabezado = $("#inputEncabezado").val();
-    var idUsuario = $("#inputUsuario").val();
-    var fecha = $("#inputFechaPublicacion").val();
-    var idEtiqueta = $("#inputEtiqueta").val();
+    var nombrePaquete = $("#inputNombre").val();
+    var precioPaquete = $("#inputPrecioPaquete").val();
+    var idAerolinea = idVueloForm;
+    var idAlojamiento = idAlojamientoForm;
+    var idTraslado = idTrasladoForm;
+    var descuento = $("#inputDescuento").val();
+    var precioFinal = $("#inputPrecioFinal").val();
+    var urlImagen = $("#img-paquete-modal").attr("src");
     $.ajax({
-        url: "/php/ColeccionNoticias.php",
+        url: "/php/RegistrarPaquete.php",
         method: "POST",
         async: true,
         data: {
-            intent: "registrar",
-            titulo: titulo,
-            descripcion: descripcion,
-            encabezado: encabezado,
-            idUsuario: idUsuario,
-            fechaPublicacion: fecha,
-            idEtiqueta: idEtiqueta,
+            nombrePaquete: nombrePaquete,
+            precioPaquete: precioPaquete,
+            idAerolinea: idAerolinea,
+            idAlojamiento: idAlojamiento,
+            idTraslado: idTraslado,
+            descuento: descuento,
+            precioFinal: precioFinal,
+            urlImagen: urlImagen,
         },
         success: function (response) {
             var obj = response;
@@ -93,6 +99,8 @@ function guardarRegistro() {
 
 function mostrarInformacionRegistro(id) {
     obtenerVuelos();
+    obtenerAlojamientos();
+    obtenerTraslados();
     $.ajax({
         url: "/php/ObtenerPaqueteId.php",
         method: "POST",
@@ -112,35 +120,41 @@ function mostrarInformacionRegistro(id) {
             $("#dropdownAerolinea").html(arrayRegistro.aerolinea);
             $("#inputOrigen").val(arrayRegistro.origen_vuelo);
             $("#inputDestino").val(arrayRegistro.destino_vuelo);
-            $("#inputAlojamiento").val(arrayRegistro.nombre_alojamiento);
             $("#inputPrecioNoche").val(arrayRegistro.precio_noche);
-            $("#inputTraslado").val(arrayRegistro.modelo_auto);
+            $("#dropdownAlojamiento").html(arrayRegistro.nombre_alojamiento);
+            $("#dropdownTraslado").html(arrayRegistro.descripcion_traslado);
             $("#inputDestinoTraslado").val(arrayRegistro.destino_traslado);
+            idVueloForm = arrayRegistro.id_vuelo;
+            idAlojamientoForm = arrayRegistro.id_alojamiento;
+            idTrasladoForm = arrayRegistro.id_traslado;
         },
     });
 }
 
 function editarRegistro() {
-    var idNoticia = $("#inputIdNoticia").val();
-    var titulo = $("#inputTitulo").val();
-    var descripcion = $("#inputDescripcion").val();
-    var encabezado = $("#inputEncabezado").val();
-    var idUsuario = $("#inputUsuario").val();
-    var fecha = $("#inputFechaPublicacion").val();
-    var idEtiqueta = $("#inputEtiqueta").val();
+    var idPaquete = $("#inputIdPaquete").val();
+    var nombrePaquete = $("#inputNombre").val();
+    var precioPaquete = $("#inputPrecioPaquete").val();
+    var idAerolinea = idVueloForm;
+    var idAlojamiento = idAlojamientoForm;
+    var idTraslado = idTrasladoForm;
+    var descuento = $("#inputDescuento").val();
+    var precioFinal = $("#inputPrecioFinal").val();
+    var urlImagen = $("#img-paquete-modal").attr("src");
     $.ajax({
-        url: "/php/ColeccionNoticias.php",
+        url: "/php/EditarPaquete.php",
         method: "POST",
         async: true,
         data: {
-            intent: "editar",
-            idNoticia: idNoticia,
-            titulo: titulo,
-            descripcion: descripcion,
-            encabezado: encabezado,
-            idUsuario: idUsuario,
-            fechaPublicacion: fecha,
-            idEtiqueta: idEtiqueta,
+            idPaquete: idPaquete,
+            nombrePaquete: nombrePaquete,
+            precioPaquete: precioPaquete,
+            idAerolinea: idAerolinea,
+            idAlojamiento: idAlojamiento,
+            idTraslado: idTraslado,
+            descuento: descuento,
+            precioFinal: precioFinal,
+            urlImagen: urlImagen,
         },
         success: function (response) {
             $("#modalInformacion").modal("hide");
@@ -151,15 +165,15 @@ function editarRegistro() {
 }
 
 function eliminarRegistro(id) {
+    var idpaquete = id;
     $("#modalInformacion").on("click", "#btnModalEliminar", function (e) {
         e.preventDefault();
         $.ajax({
-            url: "/php/ColeccionNoticias.php",
+            url: "/php/EliminarPaquete.php",
             method: "POST",
             async: true,
             data: {
-                intent: "eliminar",
-                idNoticia: id,
+                idPaquete: idpaquete,
             },
             success: function (response) {
                 $("#modalInformacion").modal("hide");
@@ -173,7 +187,12 @@ function eliminarRegistro(id) {
 function escucharBotonInformacion() {
     $("#rowsContact").on("click", "#btnInformacion", function (e) {
         e.preventDefault(); // cancela el evento por defecto ***MUY IMPORTANTE PARA EL FUNCIONAMIENTO**
-        $(this).html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`);
+        $(this).html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`
+        );
+        $(":checkbox").prop('checked', false).parent().removeClass('active');
+        deshabilitarInputs();
+        $("#img-paquete-modal").off("click");
         limpiarInput();
         deshabilitarBotones();
         habilitarBoton("#btnModalEliminar");
@@ -188,7 +207,7 @@ function escucharBotonInformacion() {
 
 function escucharBotonEliminar() {
     $("#btnModalEliminar").click(function () {
-        let id = $("#inputIdNoticia").val();
+        let id = $("#inputIdPaquete").val();
         eliminarRegistro(id);
     });
 }
@@ -211,19 +230,29 @@ function escucharBotonEditar() {
 function escucharCheckbox() {
     $("#checkboxEditar").click(function () {
         if ($("#checkboxEditar").is(":checked")) {
+            habilitarInputs();
             habilitarBoton("#btnModalEditar");
-            
         } else {
+            deshabilitarInputs();
             $("#btnModalEditar").attr("disabled", true);
         }
     });
 }
 function escucharBotonIngresar() {
     $("#btnNuevoRegistro").click(function () {
+        $(this).html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`
+        );
+        obtenerVuelos();
+        obtenerAlojamientos();
+        obtenerTraslados();
+        habilitarInputs();
+        $("#img-paquete-modal").on("click", escucharBotonImagen());
         deshabilitarBotones();
         deshabilitarBoton("#checkboxEditar");
         $("#btnModalGuardar").attr("disabled", false);
         limpiarInput();
+        $(this).html("Ingresar");
     });
 }
 function deshabilitarBotones() {
@@ -250,15 +279,17 @@ function obtenerVuelos() {
     });
 }
 
-function llenarInfoVueloForm(origen, destino, descripcion) {
+function llenarInfoVueloForm(origen, destino, descripcion, idVuelo) {
+    idVueloForm = idVuelo;
     $("#dropdownAerolinea").html(descripcion);
     $("#inputOrigen").val(origen);
     $("#inputDestino").val(destino);
 }
 
 function llenarDropdown(arreglo) {
+    $("#dropdown-vuelos").empty();
     arreglo.forEach((element) => {
-        var objDropdown = `<span class="dropdown-item" onclick="llenarInfoVueloForm('${element.origen}', '${element.destino}', '${element.descripcion}')" value="${element.idvuelo}">${element.descripcion}</span>`;
+        var objDropdown = `<span id="itemVuelo" class="dropdown-item" onclick="llenarInfoVueloForm('${element.origen}', '${element.destino}', '${element.descripcion}', '${element.idvuelo}')" value="${element.idvuelo}">${element.descripcion}</span>`;
         $("#dropdown-vuelos").append(objDropdown);
     });
 }
@@ -271,11 +302,80 @@ function limpiarInput() {
     $("#inputPrecioPaquete").val("");
     $("#inputPrecioFinal").val("");
     $("#inputDescuento").val("");
-    $("#dropdownAerolinea").val("");
     $("#inputOrigen").val("");
     $("#inputDestino").val("");
-    $("#inputAlojamiento").val("");
     $("#inputPrecioNoche").val("");
-    $("#inputTraslado").val("");
     $("#inputDestinoTraslado").val("");
+}
+
+function obtenerAlojamientos() {
+    $.ajax({
+        url: "/php/ObtenerAlojamientos.php",
+        async: true,
+        success: function (response) {
+            var respuesta = JSON.parse(response);
+            var arrayAlojamientos = respuesta.data;
+            llenarDropdownAlojamiento(arrayAlojamientos);
+        },
+    });
+}
+
+function llenarInfoAlojamientoForm(precioNoche, descripcion, idAlojamiento) {
+    idAlojamientoForm = idAlojamiento;
+    $("#dropdownAlojamiento").html(descripcion);
+    $("#inputPrecioNoche").val(precioNoche);
+}
+
+function llenarDropdownAlojamiento(arreglo) {
+    $("#dropdown-alojamientos").empty();
+    arreglo.forEach((element) => {
+        var objDropdown = `<span class="dropdown-item" onclick="llenarInfoAlojamientoForm('${element.precio_noche}', '${element.nombre_alojamiento}', '${element.idalojamiento}')" value="${element.idalojamiento}">${element.nombre_alojamiento}</span>`;
+        $("#dropdown-alojamientos").append(objDropdown);
+    });
+}
+
+function obtenerTraslados() {
+    $.ajax({
+        url: "/php/ObtenerTraslados.php",
+        async: true,
+        success: function (response) {
+            var respuesta = JSON.parse(response);
+            var array = respuesta.data;
+            llenarDropdownTraslado(array);
+        },
+    });
+}
+
+function llenarInfoTrasladoForm(destino, descripcion, idTraslado) {
+    idTrasladoForm = idTraslado;
+    $("#dropdownTraslado").html(descripcion);
+    $("#inputDestinoTraslado").val(destino);
+}
+
+function llenarDropdownTraslado(arreglo) {
+    $("#dropdown-traslado").empty();
+    arreglo.forEach((element) => {
+        var objDropdown = `<span class="dropdown-item" onclick="llenarInfoTrasladoForm('${element.destino}', '${element.descripcion}', '${element.idtraslado}')" value="${element.idtraslado}">${element.descripcion}</span>`;
+        $("#dropdown-traslado").append(objDropdown);
+    });
+}
+
+function habilitarInputs() {
+    $("#inputNombre").attr("readonly", false);
+    $("#inputPrecioPaquete").attr("readonly", false);
+    $("#inputPrecioFinal").attr("readonly", false);
+    $("#inputDescuento").attr("readonly", false);
+    habilitarBoton("#dropdownAerolinea");
+    habilitarBoton("#dropdownAlojamiento");
+    habilitarBoton("#dropdownTraslado");
+}
+
+function deshabilitarInputs() {
+    $("#inputNombre").attr("readonly", true);
+    $("#inputPrecioPaquete").attr("readonly", true);
+    $("#inputPrecioFinal").attr("readonly", true);
+    $("#inputDescuento").attr("readonly", true);
+    deshabilitarBoton("#dropdownAerolinea");
+    deshabilitarBoton("#dropdownAlojamiento");
+    deshabilitarBoton("#dropdownTraslado");
 }
